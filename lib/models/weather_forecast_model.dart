@@ -1,3 +1,5 @@
+import 'package:weather_full_app/utils/constants.dart';
+
 class WeatherForecast {
   City city;
   String cod;
@@ -164,6 +166,10 @@ class WeatherList {
     data['clouds'] = this.clouds;
     data['rain'] = this.rain;
     return data;
+  }
+
+  String getIconUrl() {
+    return Constants.WEATHER_ICONS_URL + weather[0].icon +'.png';
   }
 }
 

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_full_app/api/weather_api.dart';
 import 'package:weather_full_app/models/weather_forecast_model.dart';
+import 'package:weather_full_app/widgets/city_view.dart';
+import 'package:weather_full_app/widgets/detail_view.dart';
+import 'package:weather_full_app/widgets/temp_view.dart';
 
 class WeatherForecastScreen extends StatefulWidget {
   @override
@@ -18,9 +21,6 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
     forecastObject =
         WeatherApi().fetchWeatherForecastWithCity(cityName: _cityName);
 
-    forecastObject.then((value) {
-      print(value.list[0].weather[0].main);
-    });
     super.initState();
   }
 
@@ -49,9 +49,21 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
               future: forecastObject,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(
-                    'All good',
-                    style: Theme.of(context).textTheme.headline,
+                  return Column(
+                    children: [
+                      _Size(),
+                      CityView(
+                        snapshot: snapshot,
+                      ),
+                      _Size(),
+                      TempView(
+                        snapshot: snapshot,
+                      ),
+                      _Size(),
+                      DetailView(
+                        snapshot: snapshot,
+                      ),
+                    ],
                   );
                 } else {
                   return Center(
@@ -69,3 +81,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
     );
   }
 }
+
+// ignore: non_constant_identifier_names
+Widget _Size() => SizedBox(
+      height: 50,
+    );
