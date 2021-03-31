@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_full_app/api/weather_api.dart';
 import 'package:weather_full_app/models/weather_forecast_model.dart';
 
@@ -29,6 +30,41 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
       appBar: AppBar(
         title: Text('Weather App'),
         centerTitle: true,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.my_location),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.location_city),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: ListView(
+        children: [
+          Container(
+            child: FutureBuilder<WeatherForecast>(
+              future: forecastObject,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(
+                    'All good',
+                    style: Theme.of(context).textTheme.headline,
+                  );
+                } else {
+                  return Center(
+                    child: SpinKitDoubleBounce(
+                      color: Colors.black,
+                      size: 100,
+                    ),
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
