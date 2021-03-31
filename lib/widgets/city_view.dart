@@ -13,7 +13,7 @@ class CityView extends StatelessWidget {
     var city = snapshot.data.city.name;
     var country = snapshot.data.city.country;
     var formattedDate =
-        DateTime.fromMicrosecondsSinceEpoch(forecastList[0].dt * 1000);
+        DateTime.fromMillisecondsSinceEpoch(forecastList[0].dt * 1000);
 
     return Container(
       child: Column(

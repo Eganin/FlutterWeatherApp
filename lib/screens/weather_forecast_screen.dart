@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_full_app/api/weather_api.dart';
 import 'package:weather_full_app/models/weather_forecast_model.dart';
+import 'package:weather_full_app/widgets/bottom_list_view.dart';
 import 'package:weather_full_app/widgets/city_view.dart';
 import 'package:weather_full_app/widgets/detail_view.dart';
 import 'package:weather_full_app/widgets/temp_view.dart';
@@ -61,6 +62,10 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                       ),
                       _Size(),
                       DetailView(
+                        snapshot: snapshot,
+                      ),
+                      _Size(),
+                      BottomListView(
                         snapshot: snapshot,
                       ),
                     ],
