@@ -41,7 +41,7 @@ class WeatherApi {
     if (response.statusCode == 200) {
       return WeatherForecast.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Error response from api');
+      throw Future.error('Error response');
     }
   }
 }

@@ -19,12 +19,12 @@ class WeatherForecastScreen extends StatefulWidget {
 
 class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   Future<WeatherForecast> forecastObject;
-  String _cityName = 'London';
+  String _cityName;
 
   @override
   void initState() {
-    if(widget.locationWeather != null){
-      forecastObject = WeatherApi().fetchWeatherForecast();
+    if (widget.locationWeather != null) {
+      forecastObject = Future.value(widget.locationWeather);
     }
     super.initState();
   }
@@ -36,6 +36,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         title: Text('Weather App'),
         centerTitle: true,
         backgroundColor: Colors.black,
+        // убирает переход на прошдую страницу
+        automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(Icons.my_location),
           onPressed: () {
@@ -95,9 +97,10 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 } else {
                   return Center(
                     // new loader from library
-                    child: SpinKitDoubleBounce(
-                      color: Colors.black,
-                      size: 100,
+                    child: Text(
+                      'City not found\n Please enter correct city',
+                      style: TextStyle(fontSize: 26),
+                      textAlign: TextAlign.center,
                     ),
                   );
                 }
