@@ -9,6 +9,10 @@ import 'package:weather_full_app/widgets/detail_view.dart';
 import 'package:weather_full_app/widgets/temp_view.dart';
 
 class WeatherForecastScreen extends StatefulWidget {
+  final WeatherForecast locationWeather;
+
+  WeatherForecastScreen({this.locationWeather});
+
   @override
   State<StatefulWidget> createState() => _WeatherForecastScreenState();
 }
@@ -19,8 +23,9 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
 
   @override
   void initState() {
-    forecastObject =
-        WeatherApi().fetchWeatherForecastWithCity(cityName: _cityName);
+    if(widget.locationWeather != null){
+      forecastObject = WeatherApi().fetchWeatherForecast();
+    }
     super.initState();
   }
 
@@ -33,7 +38,11 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.my_location),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              forecastObject = WeatherApi().fetchWeatherForecast();
+            });
+          },
         ),
         actions: [
           IconButton(
@@ -49,7 +58,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 setState(() {
                   _cityName = selectedCity;
                   forecastObject = WeatherApi()
-                      .fetchWeatherForecastWithCity(cityName: _cityName);
+                      .fetchWeatherForecast(cityName: _cityName, isCity: true);
                 });
               }
             },
