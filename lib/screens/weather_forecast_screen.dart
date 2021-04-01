@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_full_app/api/weather_api.dart';
 import 'package:weather_full_app/models/weather_forecast_model.dart';
+import 'package:weather_full_app/screens/city_screen.dart';
 import 'package:weather_full_app/widgets/bottom_list_view.dart';
 import 'package:weather_full_app/widgets/city_view.dart';
 import 'package:weather_full_app/widgets/detail_view.dart';
@@ -21,7 +21,6 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   void initState() {
     forecastObject =
         WeatherApi().fetchWeatherForecastWithCity(cityName: _cityName);
-
     super.initState();
   }
 
@@ -39,7 +38,21 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.location_city),
-            onPressed: () {},
+            onPressed: () async {
+              String selectedCity =
+                  await Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return CityScreen();
+                },
+              ));
+              if (selectedCity != null) {
+                setState(() {
+                  _cityName = selectedCity;
+                  forecastObject = WeatherApi()
+                      .fetchWeatherForecastWithCity(cityName: _cityName);
+                });
+              }
+            },
           ),
         ],
       ),
@@ -72,6 +85,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                   );
                 } else {
                   return Center(
+                    // new loader from library
                     child: SpinKitDoubleBounce(
                       color: Colors.black,
                       size: 100,

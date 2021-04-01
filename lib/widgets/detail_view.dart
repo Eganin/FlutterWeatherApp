@@ -14,27 +14,26 @@ class DetailView extends StatelessWidget {
     var pressure = forecastList[0].pressure * 0.750062;
     var humidity = forecastList[0].humidity;
     var wind = forecastList[0].speed;
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Util.getItem(
-              icon: FontAwesomeIcons.thermometerThreeQuarters,
-              value: pressure.round(),
-              units: 'mm Hg'),
-          Util.getItem(
-            icon: FontAwesomeIcons.cloudRain,
-            value: humidity,
-            units: '%',
-          ),
-          Util.getItem(
-            icon: FontAwesomeIcons.wind,
-            value: wind.toInt(),
-            units: 'm/s',
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Util.getItem(
+          icon: FontAwesomeIcons.thermometerThreeQuarters,
+          value: pressure.round(),
+          units: 'mm Hg',
+        ),
+        Util.getItem(
+          icon: FontAwesomeIcons.cloudRain,
+          value: humidity,
+          units: '%',
+        ),
+        Util.getItem(
+          icon: FontAwesomeIcons.wind,
+          value: wind.toInt(),
+          units: 'm/s',
+        ),
+      ],
     );
   }
 }

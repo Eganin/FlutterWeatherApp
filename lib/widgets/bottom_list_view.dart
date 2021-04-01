@@ -11,7 +11,7 @@ class BottomListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           '7-Day Weather Forecast'.toUpperCase(),

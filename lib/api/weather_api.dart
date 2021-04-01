@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:weather_full_app/models/weather_forecast_model.dart';
@@ -24,6 +25,8 @@ class WeatherApi {
     log(response.body);
 
     if (response.statusCode == 200) {
+      return WeatherForecast.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 404) {
       return WeatherForecast.fromJson(json.decode(response.body));
     } else {
       throw Exception('Error response from api');
